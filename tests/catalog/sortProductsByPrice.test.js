@@ -34,7 +34,25 @@ describe('', () => {
     const result = sortProductsByPrice(idArray, 'desc');
     expect(result.map((product) => product.id)).toEqual([2, 5, 6]);
   });
-  test.todo("'asc' не меняет исходный массив [1, 3, 4]");
-  test.todo("'desc' не меняет исходный массив [1, 3, 4]");
-  test.todo('направление по умолчанию не меняет исходный массив всех товаров');
+  test("'asc' не меняет исходный массив [1, 3, 4]", () => {
+    const idArray = products.filter(
+      ({ id }) => [1, 3, 4].includes(id)
+    );
+    const array = idArray.map((product) => product.id);
+    sortProductsByPrice(idArray, 'asc');
+    expect(idArray.map((product) => product.id)).toEqual(array);
+  });
+  test("'desc' не меняет исходный массив [1, 3, 4]", () => {
+    const idArray = products.filter(
+      ({ id }) => [1, 3, 4].includes(id)
+    );
+    const array = idArray.map((product) => product.id);
+    sortProductsByPrice(idArray, 'desc');
+    expect(idArray.map((product) => product.id)).toEqual(array);
+  });
+  test('направление по умолчанию не меняет исходный массив всех товаров', () => {
+    const array = products.map((product) => product.id);
+    sortProductsByPrice(products);
+    expect(products.map((product) => product.id)).toEqual(array);
+  });
 });
